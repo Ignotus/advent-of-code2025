@@ -1,2 +1,2 @@
-# adventofcode2025
+# advent-of-code2025
 Yo

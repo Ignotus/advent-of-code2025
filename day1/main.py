@@ -9,7 +9,7 @@ class Dial:
         self.d = (self.d + 1) % 100
 
 
-def part1():
+def main(part: int):
     dial = Dial()
     c = 0
     with open("input.txt", "r") as f:
@@ -21,28 +21,14 @@ def part1():
                     dial.right()
                 else:
                     dial.left()
-            if dial.d == 0:
+                if part == 2 and dial.d == 0:
+                    c += 1
+
+            if part == 1 and dial.d == 0:
                 c += 1
     print(c)
 
 
-def part2():
-    dial = Dial()
-    c = 0
-    with open("input.txt", "r") as f:
-        for l in f:
-            step = int(l[1:])
-            side = l[0]
-            for i in range(step):
-                if side == "R":
-                    dial.right()
-                else:
-                    dial.left()
-                if dial.d == 0:
-                    c+= 1
-    print(c)
-
-
 if __name__ == "__main__":
-    part1()
-    part2()
+    main(1)
+    main(2)

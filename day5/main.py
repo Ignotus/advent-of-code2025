@@ -13,9 +13,8 @@ def main(file_name: str):
         for l in f:
             if "-" in l:
                 ranges.append(tuple(map(int, l.split("-"))))
-            elif l[:-1].isnumeric():
-                if is_fresh(int(l)):
-                    c += 1
+            elif l[:-1].isnumeric() and is_fresh(int(l)):
+                c += 1
     print("part1", c)
 
     sorted_ranges = sorted(ranges, key=lambda x: x[0])

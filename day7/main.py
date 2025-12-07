@@ -13,7 +13,7 @@ def split_count(pos_S: int, data: list[list[str]]) -> int:
                     if pos > 1:
                         data[i][pos - 1] = "|"
                         new_positions.append(pos - 1)
-                    if pos < len(data) - 1:
+                    if pos < len(data[0]) - 1:
                         data[i][pos + 1] = "|"
                         new_positions.append(pos + 1)
         beam_positions = new_positions

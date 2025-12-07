@@ -1,4 +1,3 @@
-import pprint
 from collections import deque
 
 def split_count(pos_S: int, data: list[list[str]]) -> int:
@@ -37,31 +36,6 @@ def timeline_count(pos_S: int, data: list[list[str]]) -> int:
                     c_map[i][j+1] += c_map[i-1][j]
 
     c = sum(c_map[-1])
-
-    return c
-
-def timeline_count_v2(pos_S: int, data: list[list[str]]) -> int:
-    """ DFS implementation. Too slow. """
-    c = 0
-
-    num_row = len(data)
-    stack = deque()
-    stack.append((1, pos_S))
-
-    while stack:
-        row, pos = stack.pop()
-
-        if row == num_row:
-            c += 1
-            print(c)
-            continue
-
-        match data[row][pos]:
-            case ".":
-                stack.append((row + 1, pos))
-            case "^":
-                stack.append((row + 1, pos - 1))
-                stack.append((row + 1, pos + 1))
 
     return c
 

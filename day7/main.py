@@ -45,7 +45,7 @@ def main(file_name: str):
         data = [list(l[:-1]) for l in f]
 
     pos_S = data[0].index("S")
-    # print(split_count(pos_S, data))
+    print(split_count(pos_S, data))
     print(timeline_count(pos_S, data))
 
 

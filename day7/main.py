@@ -6,7 +6,6 @@ def split_count(pos_S: int, data: list[list[str]]) -> int:
         for pos in beam_positions:
             match data[i][pos]:
                 case  ".":
-                    data[i][pos] = "|"
                     new_positions.append(pos)
                 case "^":
                     c += 1

@@ -3,16 +3,14 @@ def split_count(pos_S: int, data: list[list[str]]) -> int:
     beam_positions = [pos_S]
     for i in range(1, len(data)):
         new_positions = []
-        for pos in beam_positions:
+        for pos in set(beam_positions):
             match data[i][pos]:
                 case  ".":
                     new_positions.append(pos)
                 case "^":
                     c += 1
-                    if pos > 1:
-                        new_positions.append(pos - 1)
-                    if pos < len(data[0]) - 1:
-                        new_positions.append(pos + 1)
+                    new_positions.append(pos - 1)
+                    new_positions.append(pos + 1)
         beam_positions = new_positions
 
     return c

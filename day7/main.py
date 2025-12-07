@@ -1,3 +1,4 @@
+import itertools
 from collections import deque
 
 def split_count(pos_S: int, data: list[list[str]]) -> int:
@@ -25,15 +26,16 @@ def timeline_count(pos_S: int, data: list[list[str]]) -> int:
 
     num_row = len(data)
     num_col = len(data[0])
-    for i in range(1, num_row):
-        for j in range(num_col):
-            if data[i][j] == ".":
-                c_map[i][j] += c_map[i-1][j]
-            elif data[i][j] == "^":
+    for i, j in itertools.product(range(1, num_row), range(num_col)):
+        prev_state = c_map[i-1][j]
+        match data[i][j]:
+            case ".":
+                c_map[i][j] += prev_state
+            case "^":
                 if j > 0:
-                    c_map[i][j-1] += c_map[i-1][j]
+                    c_map[i][j-1] += prev_state
                 if j < num_col - 1:
-                    c_map[i][j+1] += c_map[i-1][j]
+                    c_map[i][j+1] += prev_state
 
     c = sum(c_map[-1])
 

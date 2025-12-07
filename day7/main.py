@@ -3,17 +3,17 @@ from collections import deque
 
 def split_count(pos_S: int, data: list[list[str]]) -> int:
     c = 0
-    beam_positions = [pos_S]
+    beam_positions = {pos_S}
     for i in range(1, len(data)):
-        new_positions = []
-        for pos in set(beam_positions):
+        new_positions = set()
+        for pos in beam_positions:
             match data[i][pos]:
                 case  ".":
-                    new_positions.append(pos)
+                    new_positions.add(pos)
                 case "^":
                     c += 1
-                    new_positions.append(pos - 1)
-                    new_positions.append(pos + 1)
+                    new_positions.add(pos - 1)
+                    new_positions.add(pos + 1)
         beam_positions = new_positions
 
     return c

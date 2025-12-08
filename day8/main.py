@@ -34,10 +34,7 @@ def find_last_merge(connections: list[tuple[int, tuple[int, int]]], n_boxes: int
 
 
 def group_product(groups: dict[int, int]) -> int:
-    counter = Counter()
-    for k, v in groups.items():
-        counter[v] += 1
-
+    counter = Counter(groups.values())
     return np.prod(list(sorted(counter.values(), reverse=True))[:3])
 
 

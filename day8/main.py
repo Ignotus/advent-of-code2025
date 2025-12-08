@@ -8,27 +8,13 @@ def group(connections: list[tuple[int, tuple[int, int]]], n_boxes: int) -> dict[
         we should be able to combine all {i, j, a, b} as a single
         group.
     """
-    groups = dict()
-    new_group_id = -1
+    groups = {i : i for i in range(n_boxes)}
     for _, (i, j) in connections:
-        if i in groups and j not in groups:
-            groups[j] = groups[i]
-        elif i not in groups and j in groups:
-            groups[i] = groups[j]
-        elif i not in groups and j not in groups:
-            new_group_id += 1
-            groups[i] = new_group_id
-            groups[j] = new_group_id
-        elif i != j: # both i, j in groups
+        if i != j: # both i, j in group
             group_id_j = groups[j]
             for k, v in groups.items():
                 if v == group_id_j:
                     groups[k] = groups[i]
-
-    for i in range(n_boxes):
-        if i not in groups:
-            new_group_id += 1
-            groups[i] = new_group_id
 
     return groups
 

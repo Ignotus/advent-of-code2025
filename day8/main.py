@@ -3,7 +3,7 @@ import itertools
 from collections import Counter
 import numpy as np
 
-def group(connections: list[tuple[int, tuple[int, int]]], n_boxes: int) -> int:
+def group(connections: list[tuple[int, tuple[int, int]]], n_boxes: int) -> dict[int, int]:
     """ when i -> j, and a -> b, and then later j -> ... -> a
         we should be able to combine all {i, j, a, b} as a single
         group.
@@ -30,6 +30,10 @@ def group(connections: list[tuple[int, tuple[int, int]]], n_boxes: int) -> int:
             new_group_id += 1
             groups[i] = new_group_id
 
+    return groups
+
+
+def group_product(groups: dict[int, int]) -> int:
     counter = Counter()
     for k, v in groups.items():
         counter[v] += 1
@@ -51,7 +55,7 @@ def main(file_name: str, n_connections: int):
     data = zip(distance, itertools.product(range(len(boxes)), range(len(boxes))))
 
     connections = heapq.nsmallest(n_connections, data, key=lambda x: x[0])
-    print(group(connections, len(boxes)))
+    print(group_product(group(connections, len(boxes))))
 
 
 if __name__ == "__main__":

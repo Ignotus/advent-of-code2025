@@ -4,10 +4,7 @@ from collections import Counter
 import numpy as np
 
 def group(connections: list[tuple[int, tuple[int, int]]], n_boxes: int) -> dict[int, int]:
-    """ when i -> j, and a -> b, and then later j -> ... -> a
-        we should be able to combine all {i, j, a, b} as a single
-        group.
-    """
+    """ Starting with n_boxes groups, we gradually merge them based on connections."""
     groups = {i : i for i in range(n_boxes)}
     for _, (i, j) in connections:
         if i != j: # both i, j in group

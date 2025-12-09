@@ -17,34 +17,6 @@ def part1(file_name: str):
     print(max_area)
 
 
-def contains(
-    p: Point,
-    border: list[tuple[Point, Point]]
-) -> bool:
-    for p1, p2 in border:
-        if p1[0] == p2[0] == p[0]:
-            if min(p1[1], p2[1]) <= p[1] <= max(p1[1], p2[1]):
-                return True
-
-        if p1[1] == p2[1] == p[1]:
-            if min(p1[0], p2[0]) <= p[0] <= max(p1[0], p2[0]):
-                return True
-
-    c = 0
-    for p1, p2 in border:
-        if p1[1] == p2[1]:
-            continue
-
-        if p1[1] > p2[1]:
-            p1, p2 = p2, p1
-
-        if p1[1] <= p[1] < p2[1]:
-            if p1[0] > p[0]:
-                c += 1
-
-    return c % 2 == 1
-
-
 def intersects_border(
     box: tuple[Point, Point],
     border: list[tuple[Point, Point]]
@@ -82,11 +54,7 @@ def part2(file_name: str):
         area(p1, data[j])
         for i, p1 in enumerate(data)
         for j in range(i + 1, len(data))
-        if (
-            contains([p1[0], data[j][1]], border)
-            and contains([data[j][0], p1[1]], border)
-            and not intersects_border([p1, data[j]], border)
-        )
+        if not intersects_border([p1, data[j]], border)
     )
 
     print(max_area)

@@ -45,7 +45,7 @@ def main(file_name: str):
         data = list(map(parse_line, f))
 
     c = 0
-    for i, (indicators_gt, wirings, _) in enumerate(data):
+    for indicators_gt, wirings, _ in data:
         c += try_n_push("." * len(indicators_gt), indicators_gt, wirings)
     print(c)
 

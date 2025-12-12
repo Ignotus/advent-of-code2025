@@ -4,8 +4,8 @@ import numpy as np
 def read_file(file_name: str):
     shapes = list()
     regions = list()
+    shape = list()
     with open(file_name) as f:
-        shape = list()
         for l in f:
             if "x" in l:
                 # regions
@@ -15,7 +15,7 @@ def read_file(file_name: str):
                 regions.append((size, np.asarray(quantity)))
             elif "#" in l or "." in l:
                 # shapes
-                shape.append(list(1 if x == "#" else 0 for x in l[:-1]))
+                shape.append([1 if x == "#" else 0 for x in l[:-1]])
             elif ":" in l:
                 # break point
                 if shape:

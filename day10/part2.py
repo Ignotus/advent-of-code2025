@@ -23,8 +23,6 @@ def parse_line(l: str):
 
 
 def solve(wirings: np.ndarray, joltage_req: np.ndarray) -> int:
-    bounds = (0, None)
-
     model = pulp.LpProblem("Integer Minimization Problem", pulp.LpMinimize)
     n_vars = wirings.shape[1]
     x = [pulp.LpVariable(f"x_{i}", lowBound=0, cat=pulp.LpInteger) for i in range(n_vars)]
